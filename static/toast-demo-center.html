@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification Demo (Center)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        "slide-in-down": "slideInDown 0.3s ease-out",
+                        "slide-out-up": "slideOutUp 0.3s ease-out",
+                    },
+                    keyframes: {
+                        slideInDown: {
+                            '0%': { transform: 'translateY(-100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideOutUp: {
+                            '0%': { transform: 'translateY(0)', opacity: '1' },
+                            '100%': { transform: 'translateY(-100%)', opacity: '0' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-width: 30rem;
+            width: 100%;
+            align-items: center;
+        }
+        
+        .toast {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+            animation: slideInDown 0.3s ease-out;
+        }
+        
+        .toast.hide {
+            transform: translateY(-100%);
+            opacity: 0;
+            animation: slideOutUp 0.3s ease-out;
+        }
+        
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-neutral-50 font-sans p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Toast Notification Demo (Center)</h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            <button onclick="showToast('This is a success message!', 'success')" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+                Show Success Toast
+            </button>
+            
+            <button onclick="showToast('This is an error message!', 'error')" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors">
+                Show Error Toast
+            </button>
+            
+            <button onclick="showToast('This is a warning message!', 'warning')" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors">
+                Show Warning Toast
+            </button>
+            
+            <button onclick="showToast('This is an info message!', 'info')" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+                Show Info Toast
+            </button>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">How to Use</h2>
+            <p class="mb-4">This demo shows how to implement toast notifications that appear at the top-center of the screen and automatically disappear after a few seconds.</p>
+            
+            <h3 class="text-lg font-bold mt-6 mb-2">Implementation Steps:</h3>
+            <ol class="list-decimal pl-6 space-y-2">
+                <li>Add the toast container to your HTML</li>
+                <li>Include the CSS for styling and animations</li>
+                <li>Add the JavaScript functions for creating and managing toasts</li>
+                <li>Call the showToast function with your message and type</li>
+            </ol>
+            
+            <h3 class="text-lg font-bold mt-6 mb-2">Code Example:</h3>
+            <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto"><code>// Show a toast notification
+function showToast(message, type = 'info') {
+    // Create toast container if it doesn't exist
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+    
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    // Add appropriate styling based on type
+    switch (type) {
+        case 'success':
+            toast.classList.add('bg-green-100', 'text-green-800', 'border-l-4', 'border-green-500');
+            break;
+        case 'error':
+            toast.classList.add('bg-red-100', 'text-red-800', 'border-l-4', 'border-red-500');
+            break;
+        case 'warning':
+            toast.classList.add('bg-yellow-100', 'text-yellow-800', 'border-l-4', 'border-yellow-500');
+            break;
+        default: // info
+            toast.classList.add('bg-blue-100', 'text-blue-800', 'border-l-4', 'border-blue-500');
+    }
+    
+    // Create toast content
+    toast.innerHTML = `
+        &lt;div class="flex items-center"&gt;
+            &lt;div class="flex-shrink-0"&gt;
+                &lt;!-- Icon based on type --&gt;
+            &lt;/div&gt;
+            &lt;div class="ml-3 text-sm font-normal flex-grow"&gt;${message}&lt;/div&gt;
+            &lt;button type="button" class="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 hover:bg-gray-200 hover:text-gray-900"&gt;
+                &lt;span class="sr-only"&gt;Close&lt;/span&gt;
+                &lt;svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"&gt;
+                    &lt;path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"&gt;&lt;/path&gt;
+                &lt;/svg&gt;
+            &lt;/button&gt;
+        &lt;/div&gt;
+    `;
+    
+    // Add toast to container
+    container.appendChild(toast);
+    
+    // Show toast with animation
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+    
+    // Add close button event listener
+    const closeButton = toast.querySelector('button');
+    closeButton.addEventListener('click', () => {
+        dismissToast(toast);
+    });
+    
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+        dismissToast(toast);
+    }, 5000);
+}</code></pre>
+        </div>
+    </div>
+    
+    <!-- Toast container will be created dynamically -->
+    
+    <script>
+        // Show a toast notification
+        function showToast(message, type = 'info') {
+            // Create toast container if it doesn't exist
+            let container = document.getElementById('toast-container');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'toast-container';
+                container.className = 'toast-container';
+                document.body.appendChild(container);
+            }
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            
+            // Determine toast style based on type
+            let bgColor, textColor, borderColor, iconBg, iconColor, icon;
+            
+            switch (type) {
+                case 'success':
+                    bgColor = 'bg-green-100';
+                    textColor = 'text-green-800';
+                    borderColor = 'border-l-4 border-green-500';
+                    iconBg = 'bg-green-200';
+                    iconColor = 'text-green-500';
+                    icon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>';
+                    break;
+                case 'error':
+                    bgColor = 'bg-red-100';
+                    textColor = 'text-red-800';
+                    borderColor = 'border-l-4 border-red-500';
+                    iconBg = 'bg-red-200';
+                    iconColor = 'text-red-500';
+                    icon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>';
+                    break;
+                case 'warning':
+                    bgColor = 'bg-yellow-100';
+                    textColor = 'text-yellow-800';
+                    borderColor = 'border-l-4 border-yellow-500';
+                    iconBg = 'bg-yellow-200';
+                    iconColor = 'text-yellow-500';
+                    icon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>';
+                    break;
+                default: // info
+                    bgColor = 'bg-blue-100';
+                    textColor = 'text-blue-800';
+                    borderColor = 'border-l-4 border-blue-500';
+                    iconBg = 'bg-blue-200';
+                    iconColor = 'text-blue-500';
+                    icon = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>';
+            }
+            
+            toast.classList.add(bgColor, textColor, ...borderColor.split(' '));
+            
+            // Create toast content
+            toast.innerHTML = `
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg ${iconBg} ${iconColor}">
+                    ${icon}
+                </div>
+                <div class="ml-3 text-sm font-normal flex-grow">${message}</div>
+                <button type="button" class="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 hover:bg-gray-200 hover:text-gray-900 focus:ring-2 focus:ring-gray-300" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            `;
+            
+            // Add toast to container
+            container.appendChild(toast);
+            
+            // Show toast with animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Add close button event listener
+            const closeButton = toast.querySelector('button');
+            closeButton.addEventListener('click', () => {
+                dismissToast(toast);
+            });
+            
+            // Auto-dismiss after 5 seconds
+            setTimeout(() => {
+                dismissToast(toast);
+            }, 5000);
+            
+            return toast;
+        }
+        
+        // Dismiss a toast notification
+        function dismissToast(toast) {
+            // Only dismiss if the toast is still visible
+            if (toast.classList.contains('show')) {
+                toast.classList.remove('show');
+                toast.classList.add('hide');
+                
+                // Remove from DOM after animation completes
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                    
+                    // Check if container is empty and remove it if it is
+                    const container = document.getElementById('toast-container');
+                    if (container && container.children.length === 0) {
+                        container.parentNode.removeChild(container);
+                    }
+                }, 300);
+            }
+        }
+    </script>
+</body>
+</html>

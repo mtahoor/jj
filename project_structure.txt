@@ -1,0 +1,20 @@
+eodb_rest2/
+├── accounts/            # User authentication and profiles
+├── api/                 # API endpoints and versioning
+├── applications/        # Business application processing
+├── assets/              # Raw assets before processing
+├── core/                # Core functionality and settings
+├── dashboard/           # User dashboard views
+├── documents/           # Document management
+├── services/            # Business services
+├── static/              # Compiled static files
+│   ├── css/
+│   ├── js/
+│   └── images/
+└── templates/           # HTML templates
+    ├── accounts/
+    ├── base.html
+    ├── dashboard/
+    ├── documents/
+    ├── home/
+    └── services/

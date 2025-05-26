@@ -1,0 +1,276 @@
+{% extends 'base.html' %} {% load static %} {% load application_filters %} {%
+block title %}Apply for Business License - EODB Portal{% endblock %} {% block
+content %}
+<div class="pt-24 pb-16 bg-accent-800 text-white">
+  <div class="container mx-auto px-4">
+    <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+      Apply for Business License
+    </h1>
+    <p class="text-xl text-neutral-200 max-w-3xl">
+      Select the type of license you want to apply for and provide the required
+      information.
+    </p>
+  </div>
+</div>
+
+<section class="py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-3xl mx-auto">
+      <!-- Application Form -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-8">
+          <form method="post" class="space-y-8">
+            {% csrf_token %}
+
+            <!-- Application Type Selection -->
+            <div class="mb-8">
+              <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                Business License Details
+              </h2>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <!-- Business License -->
+                <div class="relative col-span-3">
+                  <div
+                    class="flex p-4 bg-purple-50 border border-purple-200 rounded-lg"
+                  >
+                    <div
+                      class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-purple-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-medium text-neutral-900">
+                        Business License
+                      </h3>
+                      <p class="text-sm text-neutral-500">
+                        Apply for a business license
+                      </p>
+                    </div>
+                  </div>
+                  <input
+                    type="hidden"
+                    name="application_type"
+                    value="Business License"
+                  />
+                </div>
+              </div>
+
+              <div class="mb-6">
+                <label
+                  for="business_id"
+                  class="block text-sm font-medium text-neutral-700 mb-1"
+                >
+                  Select Business with Tax Compliance *
+                </label>
+                {% if businesses_without_license %}
+                <select
+                  id="business_id"
+                  name="business_id"
+                  class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  required
+                >
+                  <option value="">
+                    Select a business with Tax Compliance
+                  </option>
+                  {% for business in businesses_without_license %}
+                  <option
+                    value="{{ business.id }}"
+                    data-is-business-model="{{ business.is_business_model }}"
+                  >
+                    {{ business.name }} (TIN: {{ business.tin }})
+                  </option>
+                  {% endfor %}
+                </select>
+                <input
+                  type="hidden"
+                  id="is_business_model"
+                  name="is_business_model"
+                  value="false"
+                />
+                {% else %}
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mt-2">
+                  <div class="flex">
+                    <div class="flex-shrink-0">
+                      <svg
+                        class="h-5 w-5 text-yellow-400"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <div class="ml-3">
+                      <p class="text-sm text-yellow-700">
+                        You need to have an approved Tax Compliance application
+                        before applying for a Business License.
+                        <a
+                          href="{% url 'applications:tax_compliance_form' %}"
+                          class="font-medium underline text-yellow-700 hover:text-yellow-600"
+                        >
+                          Apply for Tax Compliance
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+
+              <div class="mb-6">
+                <label
+                  for="license_type"
+                  class="block text-sm font-medium text-neutral-700 mb-1"
+                >
+                  License Type *
+                </label>
+                <select
+                  id="license_type"
+                  name="license_type"
+                  class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  required
+                >
+                  <option value="">Select License Type</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Wholesale">Wholesale</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Service">Service</option>
+                  <option value="Tourism">Tourism</option>
+                </select>
+              </div>
+
+              <div class="mb-6">
+                <label
+                  for="license_duration"
+                  class="block text-sm font-medium text-neutral-700 mb-1"
+                >
+                  License Duration *
+                </label>
+                <select
+                  id="license_duration"
+                  name="license_duration"
+                  class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  required
+                >
+                  <option value="1 Year">1 Year</option>
+                  <option value="2 Years">2 Years</option>
+                  <option value="3 Years">3 Years</option>
+                </select>
+              </div>
+
+              <!-- Simple note about Business License -->
+              <div class="mt-4 bg-blue-50 border-l-4 border-blue-500 p-4">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg
+                      class="h-5 w-5 text-blue-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-blue-700">
+                      By submitting this application, you are applying for a
+                      Business License for your registered business. Once
+                      approved, you will be able to legally operate your
+                      business according to the license type and conditions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="border-t border-neutral-200 pt-8">
+              <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox"
+                    required
+                    class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-neutral-300 rounded"
+                  />
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="terms" class="font-medium text-neutral-700">
+                    I agree to the
+                    <a href="#" class="text-primary-600 hover:text-primary-500"
+                      >Terms and Conditions</a
+                    >
+                    and
+                    <a href="#" class="text-primary-600 hover:text-primary-500"
+                      >Privacy Policy</a
+                    >
+                  </label>
+                  <p class="text-neutral-500">
+                    By submitting this application, I certify that all
+                    information provided is true and accurate.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end pt-4">
+              <button
+                type="submit"
+                name="action"
+                value="submit"
+                class="py-2 px-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+              >
+                Submit Application
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const businessSelect = document.getElementById("business_id");
+    const isBusinessModelInput = document.getElementById("is_business_model");
+
+    if (businessSelect) {
+      businessSelect.addEventListener("change", function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const isBusinessModel = selectedOption.getAttribute(
+          "data-is-business-model"
+        );
+
+        if (isBusinessModel) {
+          isBusinessModelInput.value = isBusinessModel;
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

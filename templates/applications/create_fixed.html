@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Application - EODB Portal{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 bg-accent-800 text-white">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+      <div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+          Create New Application
+        </h1>
+        <p class="text-xl text-neutral-200 max-w-3xl">
+          Submit a new application for your business needs.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+
+          <!-- Application Type Selection -->
+          <div class="mb-8">
+            <label class="block text-lg font-medium text-neutral-900 mb-4">
+              Select Application Type
+            </label>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Business Registration -->
+              <div class="relative">
+                <input 
+                  type="radio" 
+                  id="business_registration"
+                  name="application_type" 
+                  value="Business Registration"
+                  class="peer sr-only" 
+                  required 
+                  {% if default_application_type == "Business Registration" or not default_application_type %}checked{% endif %}
+                />
+                <label
+                  for="business_registration"
+                  class="flex p-4 bg-white border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50 peer-checked:border-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-500"
+                >
+                  <div
+                    class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6 text-yellow-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-neutral-900">
+                      Business Registration
+                    </h3>
+                    <p class="text-sm text-neutral-500">
+                      Register a new business entity
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Tax Compliance -->
+              <div class="relative">
+                <input 
+                  type="radio" 
+                  id="tax_compliance"
+                  name="application_type" 
+                  value="Tax Compliance" 
+                  class="peer sr-only" 
+                  {% if default_application_type == "Tax Compliance" %}checked{% endif %}
+                />
+                <label
+                  for="tax_compliance"
+                  class="flex p-4 bg-white border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50 peer-checked:border-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-500"
+                >
+                  <div
+                    class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6 text-blue-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-neutral-900">
+                      Tax Compliance
+                    </h3>
+                    <p class="text-sm text-neutral-500">
+                      Register for tax identification number
+                    </p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Business License -->
+              <div class="relative">
+                <input 
+                  type="radio" 
+                  id="business_license"
+                  name="application_type" 
+                  value="Business License" 
+                  class="peer sr-only" 
+                  {% if default_application_type == "Business License" %}checked{% endif %}
+                />
+                <label
+                  for="business_license"
+                  class="flex p-4 bg-white border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50 peer-checked:border-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-500"
+                >
+                  <div
+                    class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6 text-purple-600"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-medium text-neutral-900">
+                      Business License
+                    </h3>
+                    <p class="text-sm text-neutral-500">
+                      Apply for a business license
+                    </p>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Business Registration Specific Fields -->
+          <div
+            id="business_registration_fields"
+            class="application-type-fields border-t border-neutral-200 pt-8"
+          >
+            <!-- Rest of the business registration fields -->
+            <!-- ... -->
+          </div>
+
+          <!-- Tax Compliance Specific Fields -->
+          <div
+            id="tax_compliance_fields"
+            class="application-type-fields border-t border-neutral-200 pt-8 hidden"
+          >
+            <!-- Rest of the tax compliance fields -->
+            <!-- ... -->
+          </div>
+
+          <!-- Business License Specific Fields -->
+          <div
+            id="business_license_fields"
+            class="application-type-fields border-t border-neutral-200 pt-8 hidden"
+          >
+            <!-- Rest of the business license fields -->
+            <!-- ... -->
+          </div>
+
+          <!-- Submit Button -->
+          <div class="mt-8 flex justify-end">
+            <button
+              type="submit"
+              class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-md font-medium shadow-md transition-colors"
+            >
+              Submit Application
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function showApplicationTypeFields(applicationType) {
+      console.log("Showing fields for:", applicationType);
+      
+      // Hide all application type fields
+      const allFields = document.querySelectorAll(".application-type-fields");
+      allFields.forEach(function (field) {
+        field.classList.add("hidden");
+      });
+      
+      // Show the selected application type fields
+      if (applicationType === "Business Registration") {
+        document.getElementById("business_registration_fields").classList.remove("hidden");
+      } else if (applicationType === "Tax Compliance") {
+        document.getElementById("tax_compliance_fields").classList.remove("hidden");
+      } else if (applicationType === "Business License") {
+        document.getElementById("business_license_fields").classList.remove("hidden");
+      }
+    }
+    
+    // Add change event listener to all radio buttons
+    const radioButtons = document.querySelectorAll('input[name="application_type"]');
+    for (const radioButton of radioButtons) {
+      radioButton.onchange = function() {
+        showApplicationTypeFields(this.value);
+      }
+    }
+    
+    // Add direct click handlers to each radio button
+    document.getElementById("business_registration").onclick = function () {
+      console.log("Business Registration radio clicked directly");
+      showApplicationTypeFields("Business Registration");
+    };
+    
+    document.getElementById("tax_compliance").onclick = function () {
+      console.log("Tax Compliance radio clicked directly");
+      showApplicationTypeFields("Tax Compliance");
+    };
+    
+    document.getElementById("business_license").onclick = function () {
+      console.log("Business License radio clicked directly");
+      showApplicationTypeFields("Business License");
+    };
+    
+    // Get the default application type from the server
+    const defaultApplicationType = "{{ default_application_type }}";
+    console.log("Default application type:", defaultApplicationType);
+    
+    // Show the initial fields based on the default application type or fallback to Business Registration
+    if (defaultApplicationType === "Tax Compliance") {
+      document.getElementById("tax_compliance").checked = true;
+      showApplicationTypeFields("Tax Compliance");
+    } else if (defaultApplicationType === "Business License") {
+      document.getElementById("business_license").checked = true;
+      showApplicationTypeFields("Business License");
+    } else {
+      // Default to Business Registration
+      document.getElementById("business_registration").checked = true;
+      showApplicationTypeFields("Business Registration");
+    }
+  });
+</script>
+{% endblock %}
+
+{% endblock %}

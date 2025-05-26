@@ -1,0 +1,143 @@
+# EODB Portal - Sitemap and User Journey
+## Sitemap
+### Public Pages
+- Home (/)  - Landing page with introduction to the portal
+  - Benefits of using the portal  - Featured services
+  - Call to action (Register/Login)
+- Services (/services/)  - List of available business services
+  - Service details pages (/services/<slug>/)    - Business Registration
+    - Tax Compliance    - Business License
+    - Other services
+- Documents (/documents/)  - Public guides and forms
+  - Regulations and policies
+- Authentication  - Login (/accounts/login/)
+  - Registration (/accounts/signup/)  - Password Reset (/accounts/password-reset/)
+### User Dashboard (Authenticated)
+- Dashboard Home (/dashboard/)  - Overview of user's applications
+  - Quick links to services  - Notifications
+- Applications (/applications/)
+  - List of user's applications (/applications/)  - Application details (/applications/<id>/)
+  - Create new application (/applications/create/)  - Specific application forms:
+    - Business Registration (/applications/create/business-registration/)    - Tax Compliance (/applications/create/tax-compliance/)
+    - Business License (/applications/create/business-license/)
+- User Profile (/accounts/profile/)  - Personal information
+  - Change password  - Notification settings
+### Admin Dashboard (Staff Only)
+- Admin Dashboard (/dashboard/admin/)  - Overview of all applications
+  - System statistics
+- Application Review (/dashboard/review-applications/)  - List of submitted applications
+  - Application details (/dashboard/applications/<id>/)  - Approve/reject functionality
+- User Management (Django Admin)
+  - User accounts  - Roles and permissions
+- Content Management (Django Admin)
+  - Services  - Documents
+  - System settings
+### API Endpoints- API Documentation (/api-docs/)
+- Business Data (/api/businesses/approved/)- Tax Information (/api/businesses/with-tin/)
+## User Journeys
+### 1. New Business Registration Journey
+1. User visits the EODB Portal homepage2. User clicks "Register Now" button
+3. User creates an account with email and password4. User is directed to the dashboard
+5. User selects "Business Registration" service6. User completes the business registration form with:
+   - Business name   - Business type
+   - Address   - Category
+7. User submits the application8. User receives confirmation and reference number
+9. User can track application status on dashboard10. User receives notification when application is approved
+11. User can download business registration certificate
+### 2. Tax Compliance Journey1. User logs into the EODB Portal
+2. User navigates to dashboard3. User selects "Tax Compliance" service
+4. System displays user's approved businesses5. User selects a business for tax compliance
+6. User completes tax compliance form7. User submits application
+8. User tracks application status on dashboard9. User receives notification when TIN is issued
+10. User can view and download tax compliance certificate
+### 3. Business License Application Journey1. User logs into the EODB Portal
+2. User navigates to dashboard3. User selects "Business License" service
+4. System verifies business registration and tax compliance5. User completes license application form with:
+   - Business details   - License type
+   - Supporting documents6. User submits application
+7. User tracks application status on dashboard8. User receives notification when license is approved
+9. User can download business license
+### 4. Admin Review Journey1. Admin logs into the EODB Portal
+2. Admin navigates to admin dashboard3. Admin views list of submitted applications
+4. Admin selects an application to review5. Admin reviews application details and documents
+6. Admin approves or rejects the application with comments7. System notifies the applicant of the decision
+8. For approved applications, system generates appropriate certificates
+### 5. Document Access Journey1. User (authenticated or public) visits the portal
+2. User navigates to Documents section3. User browses document categories (guides, forms, policies)
+4. User selects a document to view5. User downloads or prints the document
+### 6. Mobile App Journey (Future)
+1. User downloads the EODB mobile app2. User logs in with existing credentials
+3. User accesses dashboard with simplified interface4. User can view application status
+5. User receives push notifications for updates
+6. User can upload documents via mobile camera
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

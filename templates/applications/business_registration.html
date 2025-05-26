@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Business Registration - EODB Portal{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 bg-accent-800 text-white">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+      <div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+          Business Registration
+        </h1>
+        <p class="text-xl text-neutral-200 max-w-3xl">
+          Register a new business entity in Seychelles.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="application_type" value="Business Registration">
+        
+        <!-- Business Information -->
+        <div class="mb-8">
+          <h2 class="text-xl font-medium text-neutral-900 mb-6">
+            Business Information
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="business_name" class="block text-sm font-medium text-neutral-700 mb-1">
+                Business Name *
+              </label>
+              <input
+                type="text"
+                id="business_name"
+                name="business_name"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+
+            <div>
+              <label for="business_type" class="block text-sm font-medium text-neutral-700 mb-1">
+                Business Type *
+              </label>
+              <select
+                id="business_type"
+                name="business_type"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              >
+                <option value="">Select Business Type</option>
+                <option value="Sole Proprietorship">Sole Proprietorship</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Limited Liability Company">Limited Liability Company</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="business_address" class="block text-sm font-medium text-neutral-700 mb-1">
+                Business Address *
+              </label>
+              <textarea
+                id="business_address"
+                name="business_address"
+                rows="3"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="business_category" class="block text-sm font-medium text-neutral-700 mb-1">
+                Business Category *
+              </label>
+              <select
+                id="business_category"
+                name="business_category"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              >
+                <option value="">Select Business Category</option>
+                <option value="Retail">Retail</option>
+                <option value="Wholesale">Wholesale</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Service">Service</option>
+                <option value="Tourism">Tourism</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="business_start_date" class="block text-sm font-medium text-neutral-700 mb-1">
+                Business Start Date *
+              </label>
+              <input
+                type="date"
+                id="business_start_date"
+                name="business_start_date"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="border-t border-neutral-200 pt-8 mt-8 mb-8">
+          <h2 class="text-xl font-medium text-neutral-900 mb-6">
+            Contact Information
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="contact_name" class="block text-sm font-medium text-neutral-700 mb-1">
+                Contact Name *
+              </label>
+              <input
+                type="text"
+                id="contact_name"
+                name="contact_name"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+
+            <div>
+              <label for="contact_email" class="block text-sm font-medium text-neutral-700 mb-1">
+                Contact Email *
+              </label>
+              <input
+                type="email"
+                id="contact_email"
+                name="contact_email"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+
+            <div>
+              <label for="contact_phone" class="block text-sm font-medium text-neutral-700 mb-1">
+                Contact Phone *
+              </label>
+              <input
+                type="tel"
+                id="contact_phone"
+                name="contact_phone"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+
+            <div>
+              <label for="contact_position" class="block text-sm font-medium text-neutral-700 mb-1">
+                Position in Business *
+              </label>
+              <input
+                type="text"
+                id="contact_position"
+                name="contact_position"
+                required
+                class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Document Upload Section -->
+        <div class="border-t border-neutral-200 pt-8 mt-8 mb-8">
+          <h2 class="text-xl font-medium text-neutral-900 mb-6">
+            Required Documents
+          </h2>
+
+          <div id="id_documents_container" class="space-y-4">
+            <div class="id-document-input">
+              <label for="id_document_1" class="block text-sm font-medium text-neutral-700 mb-1">
+                Identification Document (ID Card/Passport) *
+              </label>
+              <div class="flex items-center space-x-2">
+                <input
+                  type="file"
+                  id="id_document_1"
+                  name="id_document_1"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  required
+                  class="block w-full text-sm text-neutral-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                />
+              </div>
+              <p class="mt-1 text-xs text-neutral-500">
+                Accepted formats: PDF, JPG, PNG. Max size: 5MB
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="border-t border-neutral-200 pt-8 mt-8">
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                required
+                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-neutral-300 rounded"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="terms" class="font-medium text-neutral-700">
+                I agree to the
+                <a href="#" class="text-primary-600 hover:text-primary-500">Terms and Conditions</a>
+                and
+                <a href="#" class="text-primary-600 hover:text-primary-500">Privacy Policy</a>
+              </label>
+              <p class="text-neutral-500">
+                By submitting this application, I certify that all information provided is true and accurate.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mt-8 flex justify-end">
+          <button
+            type="submit"
+            class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-md font-medium shadow-md transition-colors"
+          >
+            Submit Application
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends 'base.html' %} {% load static %} {% load application_filters %} {% block title %}My Applications -
+EODB Portal{% endblock %} {% block content %}
+<div class="pt-24 pb-16 bg-accent-800 text-white">
+  <div class="container mx-auto px-4">
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-center"
+    >
+      <div>
+        <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+          My Applications
+        </h1>
+        <p class="text-xl text-neutral-200 max-w-3xl">
+          Track and manage all your business applications in one place.
+        </p>
+      </div>
+      <div
+        class="mt-4 md:mt-0 flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4"
+      >
+        <a
+          href="{% url 'applications:create_business_registration' %}"
+          class="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-white rounded-full font-medium shadow-md transition-colors"
+        >
+          New Business Registration
+        </a>
+        <a
+          href="{% url 'applications:create_tax_compliance' %}"
+          class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-medium shadow-md transition-colors"
+        >
+          New Tax Compliance
+        </a>
+        <a
+          href="{% url 'applications:create_business_license' %}"
+          class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium shadow-md transition-colors"
+        >
+          New Business License
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-6xl mx-auto">
+      <!-- Filter Controls -->
+      <div class="mb-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-heading font-semibold mb-4 text-neutral-900">
+          Filter Applications
+        </h2>
+
+        <div class="flex flex-wrap gap-2">
+          <a
+            href="?status=all"
+            class="px-4 py-2 rounded-full text-sm font-medium {% if current_filter == 'all' or not current_filter %}bg-accent-600 text-white{% else %}bg-neutral-100 text-neutral-700 hover:bg-neutral-200{% endif %} transition-colors"
+          >
+            All Applications
+          </a>
+
+          <a
+            href="?status=draft"
+            class="px-4 py-2 rounded-full text-sm font-medium {% if current_filter == 'draft' %}bg-neutral-600 text-white{% else %}bg-neutral-100 text-neutral-700 hover:bg-neutral-200{% endif %} transition-colors"
+          >
+            Drafts
+          </a>
+
+          <a
+            href="?status=submitted"
+            class="px-4 py-2 rounded-full text-sm font-medium {% if current_filter == 'submitted' %}bg-blue-600 text-white{% else %}bg-blue-100 text-blue-700 hover:bg-blue-200{% endif %} transition-colors"
+          >
+            Submitted
+          </a>
+
+          <a
+            href="?status=under_review"
+            class="px-4 py-2 rounded-full text-sm font-medium {% if current_filter == 'under_review' %}bg-yellow-600 text-white{% else %}bg-yellow-100 text-yellow-700 hover:bg-yellow-200{% endif %} transition-colors"
+          >
+            Under Review
+          </a>
+
+          <a
+            href="?status=approved"
+            class="px-4 py-2 rounded-full text-sm font-medium {% if current_filter == 'approved' %}bg-green-600 text-white{% else %}bg-green-100 text-green-700 hover:bg-green-200{% endif %} transition-colors"
+          >
+            Approved
+          </a>
+
+          <a
+            href="?status=rejected"
+            class="px-4 py-2 rounded-full text-sm font-medium {% if current_filter == 'rejected' %}bg-red-600 text-white{% else %}bg-red-100 text-red-700 hover:bg-red-200{% endif %} transition-colors"
+          >
+            Rejected
+          </a>
+        </div>
+      </div>
+
+      <!-- Applications Table -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        {% if applications %}
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-neutral-200">
+            <thead class="bg-neutral-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Reference
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Business Name
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Type
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Status
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Submitted
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Last Updated
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-neutral-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-neutral-200">
+              {% for application in applications %}
+              <tr>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-900"
+                >
+                  {{ application.reference_number }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600"
+                >
+                  {{ application|get_business_name }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600"
+                >
+                  {{ application.application_type }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <span
+                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {% if application.status == 'draft' %}bg-neutral-100 text-neutral-800 {% elif application.status == 'submitted' %}bg-blue-100 text-blue-800 {% elif application.status == 'under_review' %}bg-yellow-100 text-yellow-800 {% elif application.status == 'approved' %}bg-green-100 text-green-800 {% elif application.status == 'rejected' %}bg-red-100 text-red-800{% endif %}"
+                  >
+                    {{ application.get_status_display }}
+                  </span>
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600"
+                >
+                  {{ application.submission_date|date:"M d, Y" }}
+                </td>
+                <td
+                  class="px-6 py-4 whitespace-nowrap text-sm text-neutral-600"
+                >
+                  {{ application.last_updated|date:"M d, Y" }}
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <a
+                    href="{% url 'applications:detail' application.pk %}"
+                    class="text-primary-600 hover:text-primary-900"
+                    >View</a
+                  >
+                  {% if application.status == 'draft' %}
+                  <a href="#" class="ml-3 text-accent-600 hover:text-accent-900"
+                    >Edit</a
+                  >
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-12">
+          <div class="mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-16 w-16 mx-auto text-neutral-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium text-neutral-900 mb-2">
+            No applications yet
+          </h3>
+          <p class="text-neutral-600 mb-6">
+            You haven't submitted any applications yet.
+          </p>
+          <div
+            class="flex justify-center flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4"
+          >
+            <a
+              href="{% url 'applications:create_business_registration' %}"
+              class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors"
+            >
+              New Business Registration
+            </a>
+            <a
+              href="{% url 'applications:create_tax_compliance' %}"
+              class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              New Tax Compliance
+            </a>
+            <a
+              href="{% url 'applications:create_business_license' %}"
+              class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
+            >
+              New Business License
+            </a>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

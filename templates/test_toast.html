@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Toast Notification Test - EODB Portal{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-16 bg-accent-800 text-white">
+  <div class="container mx-auto px-4">
+    <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">Toast Notification Test</h1>
+    <p class="text-xl text-neutral-200 max-w-3xl">
+      Test the toast notification system with different message types.
+    </p>
+  </div>
+</div>
+
+<section class="py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-2xl font-heading font-semibold mb-6 text-neutral-900">Test Toast Notifications</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <button onclick="createToast('This is a success message!', 'success')" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors">
+            Show Success Toast
+          </button>
+          
+          <button onclick="createToast('This is an error message!', 'error')" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors">
+            Show Error Toast
+          </button>
+          
+          <button onclick="createToast('This is a warning message!', 'warning')" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors">
+            Show Warning Toast
+          </button>
+          
+          <button onclick="createToast('This is an info message!', 'info')" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+            Show Info Toast
+          </button>
+        </div>
+        
+        <div class="mt-8">
+          <h3 class="text-xl font-heading font-semibold mb-4 text-neutral-900">Django Messages Test</h3>
+          <p class="mb-4 text-neutral-600">Click the button below to test Django messages:</p>
+          
+          <a href="{% url 'test_messages' %}" class="px-4 py-2 bg-accent-600 text-white rounded-md hover:bg-accent-700 transition-colors inline-block">
+            Test Django Messages
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

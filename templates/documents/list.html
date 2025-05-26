@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Documents - EODB Portal{% endblock %}
+
+{% block content %}
+<section class="relative">
+  <div class="pt-24 pb-16 bg-accent-800 text-white">
+    <div class="container mx-auto px-4">
+      <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">Documents</h1>
+      <p class="text-xl text-neutral-200 max-w-3xl">
+        Access all the forms, guides, and regulatory documents you need for your business in Seychelles.
+      </p>
+      <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center opacity-20"><img src="{% static 'images/dotwaves.jpg' %}" alt="Background Image" class="object-cover object-center w-full h-full" /></div>
+    </div>
+  </div>
+</section>
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4">
+    <!-- Document Categories -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-heading font-semibold mb-6">Document Categories</h2>
+      <div class="flex flex-wrap gap-3">
+        <button class="px-4 py-2 bg-primary-500 text-white rounded-full font-medium">All Documents</button>
+        <button class="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-full font-medium">Forms</button>
+        <button class="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-full font-medium">Guides</button>
+        <button class="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-full font-medium">Regulations</button>
+        <button class="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 rounded-full font-medium">Policies</button>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="mb-12">
+      <div class="relative max-w-2xl mx-auto">
+        <input type="text" placeholder="Search documents..." class="w-full px-5 py-3 border border-neutral-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+        <button class="absolute right-2 top-2 p-1 bg-primary-500 text-white rounded-full w-8 h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Documents List -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Document 1 -->
+      <div class="bg-neutral-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded">Form</span>
+          </div>
+          <h3 class="text-xl font-heading font-semibold mb-2">Business Registration Form</h3>
+          <p class="text-neutral-600 mb-4">Official form for registering a new business entity in Seychelles.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-neutral-500">Updated: May 1, 2025</span>
+            <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+              Download
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document 2 -->
+      <div class="bg-neutral-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <span class="bg-accent-100 text-accent-800 text-xs font-medium px-2.5 py-0.5 rounded">Guide</span>
+          </div>
+          <h3 class="text-xl font-heading font-semibold mb-2">Business Registration Guide</h3>
+          <p class="text-neutral-600 mb-4">Step-by-step guide to registering your business in Seychelles.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-neutral-500">Updated: April 15, 2025</span>
+            <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+              Download
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document 3 -->
+      <div class="bg-neutral-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-secondary-100 rounded-full flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+              </svg>
+            </div>
+            <span class="bg-secondary-100 text-secondary-800 text-xs font-medium px-2.5 py-0.5 rounded">Regulation</span>
+          </div>
+          <h3 class="text-xl font-heading font-semibold mb-2">Business Tax Regulations</h3>
+          <p class="text-neutral-600 mb-4">Official tax regulations for businesses operating in Seychelles.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-neutral-500">Updated: March 30, 2025</span>
+            <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+              Download
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document 4 -->
+      <div class="bg-neutral-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 rounded">Form</span>
+          </div>
+          <h3 class="text-xl font-heading font-semibold mb-2">Business License Application</h3>
+          <p class="text-neutral-600 mb-4">Application form for obtaining a business license in Seychelles.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-neutral-500">Updated: April 5, 2025</span>
+            <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+              Download
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Document 5 -->
+      <div class="bg-neutral-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-accent-100 rounded-full flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <span class="bg-accent-100 text-accent-800 text-xs font-medium px-2.5 py-0.5 rounded">Guide</span>
+          </div>
+          <h3 class="text-xl font-heading font-semibold mb-2">Tax Compliance Guide</h3>
+          <p class="text-neutral-600 mb-4">Comprehensive guide to maintaining tax compliance for businesses.</p>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-neutral-500">Updated: March 20, 2025</span>
+            <a href="#" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+              Download
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+      <!-- Document 6 -->
+      <div class="bg-neutral-50 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-neutral-200 rounded-full flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-neutral-600" fill="
+              

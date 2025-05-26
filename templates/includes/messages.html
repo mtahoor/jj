@@ -1,0 +1,93 @@
+{% if messages %}
+<div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-xs w-full">
+  {% for message in messages %}
+    <div id="toast-{{ forloop.counter }}" class="toast-message flex items-center w-full p-4 mb-2 rounded-lg shadow-md transition-all duration-300 transform
+      {% if message.tags == 'success' %}bg-green-100 text-green-800 border-l-4 border-green-500
+      {% elif message.tags == 'error' %}bg-red-100 text-red-800 border-l-4 border-red-500
+      {% elif message.tags == 'warning' %}bg-yellow-100 text-yellow-800 border-l-4 border-yellow-500
+      {% elif message.tags == 'info' %}bg-blue-100 text-blue-800 border-l-4 border-blue-500
+      {% else %}bg-neutral-100 text-neutral-800 border-l-4 border-neutral-500{% endif %}">
+      <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg
+        {% if message.tags == 'success' %}text-green-500 bg-green-200
+        {% elif message.tags == 'error' %}text-red-500 bg-red-200
+        {% elif message.tags == 'warning' %}text-yellow-500 bg-yellow-200
+        {% elif message.tags == 'info' %}text-blue-500 bg-blue-200
+        {% else %}text-neutral-500 bg-neutral-200{% endif %}">
+        {% if message.tags == 'success' %}
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+          </svg>
+        {% elif message.tags == 'error' %}
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        {% elif message.tags == 'warning' %}
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+          </svg>
+        {% elif message.tags == 'info' %}
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+        {% else %}
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+          </svg>
+        {% endif %}
+      </div>
+      <div class="ml-3 text-sm font-normal flex-grow">{{ message }}</div>
+      <button type="button" class="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 inline-flex h-8 w-8 hover:bg-gray-200 hover:text-gray-900 focus:ring-2 focus:ring-gray-300" data-dismiss-target="#toast-{{ forloop.counter }}" aria-label="Close">
+        <span class="sr-only">Close</span>
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Show toasts with animation
+    const toasts = document.querySelectorAll('.toast-message');
+    
+    toasts.forEach((toast, index) => {
+      // Add animation class with staggered delay
+      setTimeout(() => {
+        toast.classList.add('animate-slide-in-right');
+        toast.classList.remove('translate-x-full', 'opacity-0');
+      }, index * 150);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        dismissToast(toast);
+      }, 5000 + (index * 150));
+      
+      // Add click event to close button
+      const closeButton = toast.querySelector('button');
+      closeButton.addEventListener('click', function() {
+        dismissToast(toast);
+      });
+    });
+    
+    function dismissToast(toast) {
+      // Only dismiss if the toast is still visible
+      if (!toast.classList.contains('opacity-0')) {
+        toast.classList.remove('animate-slide-in-right');
+        toast.classList.add('animate-slide-out-right');
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+          toast.remove();
+          
+          // Check if container is empty and remove it if it is
+          const container = document.getElementById('toast-container');
+          if (container && container.children.length === 0) {
+            container.remove();
+          }
+        }, 300);
+      }
+    }
+  });
+</script>
+{% endif %}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Ease of Doing Business Portal{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#FFF8E1",
+                100: "#FFECB3",
+                200: "#FFE082",
+                300: "#FFD54F",
+                400: "#FFCA28",
+                500: "#F5A623", // Primary gold
+                600: "#EF9600",
+                700: "#E68400",
+                800: "#DD7200",
+                900: "#D05700",
+              },
+              secondary: {
+                50: "#FFF3E0",
+                100: "#FFE0B2",
+                200: "#FFCC80",
+                300: "#FFB74D",
+                400: "#FFA726",
+                500: "#E67E22", // Deep orange
+                600: "#D97106",
+                700: "#C26401",
+                800: "#B05900",
+                900: "#9A4C00",
+              },
+              accent: {
+                50: "#E3F2FD",
+                100: "#BBDEFB",
+                200: "#90CAF9",
+                300: "#64B5F6",
+                400: "#42A5F5",
+                500: "#1E88E5",
+                600: "#1976D2",
+                700: "#1565C0",
+                800: "#1E3A8A", // Navy blue
+                900: "#0D2066",
+              },
+              neutral: {
+                50: "#F8FAFC",
+                100: "#F1F5F9",
+                200: "#E2E8F0",
+                300: "#CBD5E1",
+                400: "#94A3B8",
+                500: "#64748B",
+                600: "#475569",
+                700: "#334155",
+                800: "#1E293B",
+                900: "#0F172A",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              heading: ["Poppins", "sans-serif"],
+            },
+            backgroundImage: {
+              "hero-pattern": "url('/static/images/hero-bg.jpg')",
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-in-out",
+              "slide-up": "slideUp 0.5s ease-out",
+              "slide-down": "slideDown 0.3s ease-out",
+              "slide-in-right": "slideInRight 0.3s ease-out",
+              "slide-out-right": "slideOutRight 0.3s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              slideDown: {
+                "0%": { transform: "translateY(-20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+              slideInRight: {
+                "0%": { transform: "translateX(100%)", opacity: "0" },
+                "100%": { transform: "translateX(0)", opacity: "1" },
+              },
+              slideOutRight: {
+                "0%": { transform: "translateX(0)", opacity: "1" },
+                "100%": { transform: "translateX(100%)", opacity: "0" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Toast Notifications CSS -->
+    <link rel="stylesheet" href="/static/css/toast.css" />
+
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body class="min-h-screen bg-neutral-50 font-sans">
+    {% include 'includes/header.html' %}
+
+    <!-- Django Messages -->
+    {% include 'includes/django_messages.html' %}
+
+    <main>{% block content %}{% endblock %}</main>
+
+    {% include 'includes/footer.html' %}
+
+    <!-- Toast Notifications -->
+    <script src="/static/js/toast-simple.js"></script>
+    <script src="/static/js/django-messages.js"></script>
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

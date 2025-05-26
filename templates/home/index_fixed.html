@@ -1,0 +1,486 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ease of Doing Business Portal - Simplifying Business in Seychelles{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative bg-accent-800 text-white">
+  <div class="absolute inset-0 bg-hero-pattern bg-cover bg-center opacity-20">
+    <img
+      src="{% static 'images/businesswoman.jpg' %}"
+      alt="Background Image"
+      class="object-cover object-center w-full h-full"
+    />
+  </div>
+  <div class="container mx-auto px-4 py-32 md:py-40 relative z-10">
+    <div class="max-w-3xl">
+      <h1
+        class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-slide-up"
+      >
+        Simplifying Business Registration in Seychelles
+      </h1>
+      <p
+        class="text-xl md:text-2xl mb-8 text-neutral-200 animate-slide-up"
+        style="animation-delay: 0.1s"
+      >
+        Your one-stop portal for business registration, licensing, and
+        compliance services.
+      </p>
+      <div
+        class="flex flex-col sm:flex-row gap-4 animate-slide-up"
+        style="animation-delay: 0.2s"
+      >
+        <a
+          href="{% url 'services:list' %}"
+          class="px-8 py-4 rounded-full font-medium bg-primary-500 text-white hover:bg-primary-600 transition-colors shadow-lg text-center"
+        >
+          Explore Services
+        </a>
+        <a
+          href="{% url 'accounts:signup' %}"
+          class="px-8 py-4 rounded-full font-medium bg-white text-accent-800 hover:bg-neutral-100 transition-colors shadow-lg text-center"
+        >
+          Register Now
+        </a>
+        {% comment %} <a
+          href="{% url 'test_messages' %}"
+          class="px-8 py-4 rounded-full font-medium bg-neutral-800 text-white hover:bg-neutral-700 transition-colors shadow-lg text-center"
+        >
+          Test Notifications
+        </a> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2
+        class="font-heading text-3xl md:text-4xl font-bold mb-4 text-neutral-900"
+      >
+        Why Use Our Portal?
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-3xl mx-auto">
+        We've simplified the business registration process to save you time and
+        resources.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Benefit 1 -->
+      <div
+        class="bg-neutral-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow"
+      >
+        <div
+          class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-primary-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
+        </div>
+        <h3 class="font-heading text-xl font-semibold mb-3 text-neutral-900">
+          Fast Processing
+        </h3>
+        <p class="text-neutral-600">
+          Streamlined digital processes reduce waiting times and expedite your
+          business registration.
+        </p>
+      </div>
+
+      <!-- Benefit 2 -->
+      <div
+        class="bg-neutral-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow"
+      >
+        <div
+          class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-primary-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h3 class="font-heading text-xl font-semibold mb-3 text-neutral-900">
+          Transparent Process
+        </h3>
+        <p class="text-neutral-600">
+          Track your application status in real-time and receive updates at
+          every stage of the process.
+        </p>
+      </div>
+
+      <!-- Benefit 3 -->
+      <div
+        class="bg-neutral-50 rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow"
+      >
+        <div
+          class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-primary-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+            />
+          </svg>
+        </div>
+        <h3 class="font-heading text-xl font-semibold mb-3 text-neutral-900">
+          Secure & Compliant
+        </h3>
+        <p class="text-neutral-600">
+          Your data is protected with enterprise-grade security while ensuring
+          regulatory compliance.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-16 md:py-24 bg-neutral-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2
+        class="font-heading text-3xl md:text-4xl font-bold mb-4 text-neutral-900"
+      >
+        Our Services
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-3xl mx-auto">
+        Comprehensive business services to help you establish and grow your
+        business in Seychelles.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Service 1 -->
+      <div
+        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
+      >
+        <div class="h-48 bg-primary-600 relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-20 w-20 text-white opacity-80"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-xl font-semibold mb-3 text-neutral-900">
+            Business Registration
+          </h3>
+          <p class="text-neutral-600 mb-4">
+            Register your business entity quickly and efficiently with our
+            streamlined online process.
+          </p>
+          <a
+            href="#"
+            class="inline-flex items-center text-primary-600 font-medium hover:text-primary-700"
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div
+        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
+      >
+        <div class="h-48 bg-accent-600 relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-20 w-20 text-white opacity-80"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-xl font-semibold mb-3 text-neutral-900">
+            Business Licensing
+          </h3>
+          <p class="text-neutral-600 mb-4">
+            Apply for and manage all necessary licenses and permits for your
+            business operations.
+          </p>
+          <a
+            href="#"
+            class="inline-flex items-center text-primary-600 font-medium hover:text-primary-700"
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div
+        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300"
+      >
+        <div class="h-48 bg-secondary-500 relative">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-20 w-20 text-white opacity-80"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="font-heading text-xl font-semibold mb-3 text-neutral-900">
+            Tax Compliance
+          </h3>
+          <p class="text-neutral-600 mb-4">
+            Register for tax identification number and manage your tax
+            obligations with ease through our portal.
+          </p>
+          <a
+            href="#"
+            class="inline-flex items-center text-primary-600 font-medium hover:text-primary-700"
+          >
+            Learn More
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 ml-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <a
+        href="{% url 'services:list' %}"
+        class="inline-flex items-center px-6 py-3 rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors shadow-md"
+      >
+        View All Services
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 ml-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M14 5l7 7m0 0l-7 7m7-7H3"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Process Steps Section -->
+<section class="py-16 md:py-24 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2
+        class="font-heading text-3xl md:text-4xl font-bold mb-4 text-neutral-900"
+      >
+        How It Works
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-3xl mx-auto">
+        Our simple 4-step process makes business registration quick and
+        hassle-free.
+      </p>
+    </div>
+
+    <div class="relative">
+      <!-- Process line (desktop) -->
+      <div
+        class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-neutral-200 -translate-y-1/2 z-0"
+      ></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+        <!-- Step 1 -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary-500 text-white flex items-center justify-center text-xl font-bold mb-4 shadow-md"
+          >
+            1
+          </div>
+          <h3 class="font-heading text-xl font-semibold mb-2 text-neutral-900">
+            Create Account
+          </h3>
+          <p class="text-neutral-600">
+            Register for an account to access all our services.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary-500 text-white flex items-center justify-center text-xl font-bold mb-4 shadow-md"
+          >
+            2
+          </div>
+          <h3 class="font-heading text-xl font-semibold mb-2 text-neutral-900">
+            Select Service
+          </h3>
+          <p class="text-neutral-600">
+            Choose the service that matches your business needs.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary-500 text-white flex items-center justify-center text-xl font-bold mb-4 shadow-md"
+          >
+            3
+          </div>
+          <h3 class="font-heading text-xl font-semibold mb-2 text-neutral-900">
+            Submit Documents
+          </h3>
+          <p class="text-neutral-600">
+            Upload required documents and complete the application.
+          </p>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex flex-col items-center text-center">
+          <div
+            class="w-16 h-16 rounded-full bg-primary-500 text-white flex items-center justify-center text-xl font-bold mb-4 shadow-md"
+          >
+            4
+          </div>
+          <h3 class="font-heading text-xl font-semibold mb-2 text-neutral-900">
+            Get Approved
+          </h3>
+          <p class="text-neutral-600">
+            Receive your business registration and start operating.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-16 md:py-24 text-neutral-900">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2
+        class="font-heading text-3xl md:text-4xl font-bold mb-6 text-neutral-900"
+      >
+        Ready to Start Your Business in Seychelles?
+      </h2>
+      <p class="text-xl text-neutral-900 mb-8 max-w-2xl mx-auto">
+        Join thousands of entrepreneurs who have successfully established their
+        businesses through our platform.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="{% url 'accounts:signup' %}"
+          class="px-8 py-4 rounded-full font-medium bg-primary-500 text-neutral-900 hover:bg-primary-600 transition-colors shadow-lg text-center"
+        >
+          Register Now
+        </a>
+        <a
+          href="{% url 'services:list' %}"
+          class="px-8 py-4 rounded-full font-medium bg-white text-neutral-900 hover:bg-neutral-100 transition-colors shadow-lg text-center"
+        >
+          Explore Services
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

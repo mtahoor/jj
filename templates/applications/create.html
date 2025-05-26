@@ -1,0 +1,1335 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Create Application
+- EODB Portal{% endblock %} {% block content %}
+<div class="pt-24 pb-16 bg-blue-900 text-white">
+  <div class="container mx-auto px-4">
+    <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">
+      Start New Application
+    </h1>
+    <p class="text-xl text-neutral-200 max-w-3xl">
+      Select the type of application you want to submit and provide the required
+      information.
+    </p>
+  </div>
+</div>
+
+<section class="py-12 md:py-16">
+  <div class="container mx-auto px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Application Form -->
+      <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="p-8">
+          <form method="post" class="space-y-8">
+            {% csrf_token %}
+
+            <!-- Application Type Selection -->
+            <div>
+              <label
+                for="application_type"
+                class="block text-lg font-medium text-neutral-900 mb-4"
+              >
+                Select Application Type
+              </label>
+
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Business Registration -->
+                <div class="relative">
+                  <input type="radio" id="business_registration"
+                  name="application_type" value="Business Registration"
+                  class="peer sr-only" required {% if default_application_type
+                  == "Business Registration" or not default_application_type
+                  %}checked{% endif %} />
+                  <label
+                    for="business_registration"
+                    class="flex p-4 bg-white border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50 peer-checked:border-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-500"
+                  >
+                    <div
+                      class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mr-4"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-yellow-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-medium text-neutral-900">
+                        Business Registration
+                      </h3>
+                      <p class="text-sm text-neutral-500">
+                        Register a new business entity
+                      </p>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Tax Compliance -->
+                <div class="relative">
+                  <input type="radio" id="tax_compliance"
+                  name="application_type" value="Tax Compliance" class="peer
+                  sr-only" {% if default_application_type == "Tax Compliance"
+                  %}checked{% endif %} />
+                  <label
+                    for="tax_compliance"
+                    class="flex p-4 bg-white border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50 peer-checked:border-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-500"
+                  >
+                    <div
+                      class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-medium text-neutral-900">
+                        Tax Compliance
+                      </h3>
+                      <p class="text-sm text-neutral-500">
+                        Register for tax identification number
+                      </p>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Business License -->
+                <div class="relative">
+                  <input type="radio" id="business_license"
+                  name="application_type" value="Business License" class="peer
+                  sr-only" {% if default_application_type =="Business License"
+                  %}checked{% endif %} />
+                  <label
+                    for="business_license"
+                    class="flex p-4 bg-white border border-neutral-200 rounded-lg cursor-pointer hover:bg-neutral-50 peer-checked:border-yellow-500 peer-checked:ring-2 peer-checked:ring-yellow-500"
+                  >
+                    <div
+                      class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 text-purple-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="font-medium text-neutral-900">
+                        Business License
+                      </h3>
+                      <p class="text-sm text-neutral-500">
+                        Apply for a business license
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Business Registration Specific Fields -->
+            <div
+              id="business_registration_fields"
+              class="application-type-fields border-t border-neutral-200 pt-8"
+            >
+              <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                Business Information
+              </h2>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="business_name_input"
+                    class="block text-sm font-medium text-neutral-700 mb-1"
+                  >
+                    Business Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="business_name_input"
+                    name="business_name"
+                    required
+                    class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="business_type"
+                    class="block text-sm font-medium text-neutral-700 mb-1"
+                  >
+                    Business Type *
+                  </label>
+                  <select
+                    id="business_type"
+                    name="business_type"
+                    required
+                    class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  >
+                    <option value="">Select Business Type</option>
+                    <option value="Sole Proprietorship">
+                      Sole Proprietorship
+                    </option>
+                    <option value="Partnership">Partnership</option>
+                    <option value="Limited Liability Company">
+                      Limited Liability Company
+                    </option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    for="business_address"
+                    class="block text-sm font-medium text-neutral-700 mb-1"
+                  >
+                    Business Address *
+                  </label>
+                  <textarea
+                    id="business_address"
+                    name="business_address"
+                    rows="3"
+                    required
+                    class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label
+                    for="business_category"
+                    class="block text-sm font-medium text-neutral-700 mb-1"
+                  >
+                    Business Category *
+                  </label>
+                  <select
+                    id="business_category"
+                    name="business_category"
+                    required
+                    class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  >
+                    <option value="">Select Business Category</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Wholesale">Wholesale</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Service">Service</option>
+                    <option value="Tourism">Tourism</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    for="business_start_date"
+                    class="block text-sm font-medium text-neutral-700 mb-1"
+                  >
+                    Business Start Date *
+                  </label>
+                  <input
+                    type="date"
+                    id="business_start_date"
+                    name="business_start_date"
+                    required
+                    class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <!-- Contact Information -->
+              <div class="border-t border-neutral-200 pt-8 mt-8">
+                <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                  Contact Information
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      for="contact_name"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Contact Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="contact_name"
+                      name="contact_name"
+                      required
+                      class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for="contact_email"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Contact Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="contact_email"
+                      name="contact_email"
+                      required
+                      class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for="contact_phone"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Contact Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      id="contact_phone"
+                      name="contact_phone"
+                      required
+                      class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for="contact_position"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Position in Business *
+                    </label>
+                    <input
+                      type="text"
+                      id="contact_position"
+                      name="contact_position"
+                      required
+                      class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Document Upload Section -->
+              <div class="border-t border-neutral-200 pt-8 mt-8">
+                <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                  Required Documents
+                </h2>
+
+                <div id="id_documents_container" class="space-y-4">
+                  <div class="id-document-input">
+                    <label
+                      for="id_document_1"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Identification Document (ID Card/Passport) *
+                    </label>
+                    <div class="flex items-center space-x-2">
+                      <input
+                        type="file"
+                        id="id_document_1"
+                        name="id_document_1"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        required
+                        class="block w-full text-sm text-neutral-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                      />
+                    </div>
+                    <p class="mt-1 text-xs text-neutral-500">
+                      Accepted formats: PDF, JPG, PNG. Max size: 5MB
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <button
+                    type="button"
+                    id="add_id_document"
+                    class="inline-flex items-center px-3 py-2 border border-primary-300 shadow-sm text-sm leading-4 font-medium rounded-md text-primary-700 bg-white hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                  >
+                    <svg
+                      class="-ml-0.5 mr-2 h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    Add Another ID Document
+                  </button>
+                </div>
+              </div>
+
+              <!-- Terms and Conditions -->
+              <div class="border-t border-neutral-200 pt-8 mt-8">
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      id="terms"
+                      name="terms"
+                      type="checkbox"
+                      required
+                      class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-neutral-300 rounded"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label for="terms" class="font-medium text-neutral-700">
+                      I agree to the
+                      <a
+                        href="#"
+                        class="text-primary-600 hover:text-primary-500"
+                        >Terms and Conditions</a
+                      >
+                      and
+                      <a
+                        href="#"
+                        class="text-primary-600 hover:text-primary-500"
+                        >Privacy Policy</a
+                      >
+                    </label>
+                    <p class="text-neutral-500">
+                      By submitting this application, I certify that all
+                      information provided is true and accurate.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tax Compliance Specific Fields -->
+            <div
+              id="tax_compliance_fields"
+              class="application-type-fields border-t border-neutral-200 pt-8 hidden"
+            >
+              <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                Tax Compliance Details
+              </h2>
+
+              <div class="mb-6">
+                <label
+                  for="registered_business"
+                  class="block text-sm font-medium text-neutral-700 mb-1"
+                >
+                  Select Registered Business *
+                </label>
+                <select
+                  id="registered_business"
+                  name="registered_business"
+                  class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  required
+                >
+                  <option value="">Select a registered business</option>
+                  <!-- This would be populated dynamically with the user's registered businesses -->
+                </select>
+                <input
+                  type="hidden"
+                  id="is_business_model"
+                  name="is_business_model"
+                  value="false"
+                />
+              </div>
+
+              <!-- Message shown when user has no registered businesses -->
+              <div
+                id="no_registered_business_message"
+                class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6"
+              >
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg
+                      class="h-5 w-5 text-yellow-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                      You need to register a business first before applying for
+                      Tax Compliance.
+                      <a
+                        href="#"
+                        class="font-medium underline text-yellow-700 hover:text-yellow-600"
+                        id="register_business_link"
+                      >
+                        Register a business now
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Simple note about Tax Compliance -->
+              <div class="mt-4">
+                <p class="text-sm text-neutral-600">
+                  By submitting this application, you are applying for a Tax
+                  Identification Number (TIN) for your registered business. Once
+                  approved, you will be able to use this TIN for all tax-related
+                  matters and to apply for business licenses.
+                </p>
+              </div>
+            </div>
+
+            <!-- Business License Specific Fields -->
+            <div
+              id="business_license_fields"
+              class="application-type-fields border-t border-neutral-200 pt-8 hidden"
+            >
+              <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                Business License Details
+              </h2>
+
+              <div class="mb-6">
+                <label
+                  for="business_with_tin"
+                  class="block text-sm font-medium text-neutral-700 mb-1"
+                >
+                  Select Business with TIN *
+                </label>
+                <select
+                  id="business_with_tin"
+                  name="business_with_tin"
+                  class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  required
+                >
+                  <option value="">Select a business with TIN</option>
+                  <!-- This would be populated dynamically with the user's businesses that have TIN -->
+                </select>
+                <input
+                  type="hidden"
+                  id="is_business_model_license"
+                  name="is_business_model"
+                  value="false"
+                />
+              </div>
+
+              <!-- Message shown when user has no businesses with TIN -->
+              <div
+                id="no_business_with_tin_message"
+                class="hidden bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6"
+              >
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <svg
+                      class="h-5 w-5 text-yellow-400"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm text-yellow-700">
+                      You need to register for a Tax Identification Number (TIN)
+                      before applying for a Business License.
+                      <a
+                        href="#"
+                        class="font-medium underline text-yellow-700 hover:text-yellow-600"
+                        id="get_tin_link"
+                      >
+                        Apply for TIN now
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-6">
+                <label
+                  for="license_type"
+                  class="block text-sm font-medium text-neutral-700 mb-1"
+                >
+                  License Type *
+                </label>
+                <select
+                  id="license_type"
+                  name="license_type"
+                  class="appearance-none block w-full px-3 py-2 border border-neutral-300 rounded-md shadow-sm placeholder-neutral-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                  required
+                >
+                  <option value="">Select License Type</option>
+                  <option value="Retail">Retail</option>
+                  <option value="Wholesale">Wholesale</option>
+                  <option value="Manufacturing">Manufacturing</option>
+                  <option value="Service">Service</option>
+                  <option value="Tourism">Tourism</option>
+                </select>
+              </div>
+
+              <!-- Document Upload Section -->
+              <div class="border-t border-neutral-200 pt-8 mt-8">
+                <h2 class="text-xl font-medium text-neutral-900 mb-6">
+                  Required Documents
+                </h2>
+
+                <div class="space-y-4">
+                  <div>
+                    <label
+                      for="business_plan"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Business Plan *
+                    </label>
+                    <div class="flex items-center space-x-2">
+                      <input
+                        type="file"
+                        id="business_plan"
+                        name="business_plan"
+                        accept=".pdf,.doc,.docx"
+                        required
+                        class="block w-full text-sm text-neutral-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                      />
+                    </div>
+                    <p class="mt-1 text-xs text-neutral-500">
+                      Accepted formats: PDF, DOC, DOCX. Max size: 10MB
+                    </p>
+                  </div>
+
+                  <div>
+                    <label
+                      for="proof_of_address"
+                      class="block text-sm font-medium text-neutral-700 mb-1"
+                    >
+                      Proof of Business Address *
+                    </label>
+                    <div class="flex items-center space-x-2">
+                      <input
+                        type="file"
+                        id="proof_of_address"
+                        name="proof_of_address"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        required
+                        class="block w-full text-sm text-neutral-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+                      />
+                    </div>
+                    <p class="mt-1 text-xs text-neutral-500">
+                      Accepted formats: PDF, JPG, PNG. Max size: 5MB
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Terms and Conditions -->
+              <div class="border-t border-neutral-200 pt-8 mt-8">
+                <div class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input
+                      id="license_terms"
+                      name="license_terms"
+                      type="checkbox"
+                      required
+                      class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-neutral-300 rounded"
+                    />
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label
+                      for="license_terms"
+                      class="font-medium text-neutral-700"
+                    >
+                      I agree to the
+                      <a
+                        href="#"
+                        class="text-primary-600 hover:text-primary-500"
+                        >Terms and Conditions</a
+                      >
+                      and
+                      <a
+                        href="#"
+                        class="text-primary-600 hover:text-primary-500"
+                        >Privacy Policy</a
+                      >
+                    </label>
+                    <p class="text-neutral-500">
+                      By submitting this application, I certify that all
+                      information provided is true and accurate.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="flex items-center justify-between pt-4">
+              <button
+                type="submit"
+                name="action"
+                value="save_draft"
+                class="py-2 px-4 border border-neutral-300 rounded-md shadow-sm text-sm font-medium text-neutral-700 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-500"
+              >
+                Save as Draft
+              </button>
+
+              <button
+                type="submit"
+                name="action"
+                value="submit"
+                class="py-2 px-6 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              >
+                Submit Application
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get all radio buttons for application type
+    const applicationTypeRadios = document.querySelectorAll(
+      'input[name="application_type"]'
+    );
+
+    // Get all application type specific field sections
+    const applicationTypeFields = document.querySelectorAll(
+      ".application-type-fields"
+    );
+
+    // Function to show the appropriate fields based on selected application type
+    function showApplicationTypeFields(applicationType) {
+      console.log("showApplicationTypeFields called with:", applicationType);
+
+      // Log all available fieldsets
+      console.log("Available fieldsets:");
+      applicationTypeFields.forEach(function (fieldset) {
+        console.log("- Fieldset ID:", fieldset.id);
+      });
+
+      // Hide all application type specific fields first
+      applicationTypeFields.forEach(function (fieldset) {
+        fieldset.classList.add("hidden");
+        console.log("Added hidden class to:", fieldset.id);
+      });
+
+      // Show the fields for the selected application type
+      if (applicationType) {
+        const fieldId =
+          applicationType.toLowerCase().replace(/\s+/g, "_") + "_fields";
+        console.log("Looking for fieldset with ID:", fieldId);
+
+        const fieldset = document.getElementById(fieldId);
+        if (fieldset) {
+          console.log("Found fieldset, removing hidden class from:", fieldId);
+          fieldset.classList.remove("hidden");
+        } else {
+          console.error("Fieldset not found with ID:", fieldId);
+          // Try to find it by other means
+          const possibleFieldset = document.querySelector(`[id="${fieldId}"]`);
+          console.log("Alternative lookup result:", possibleFieldset);
+        }
+
+        // Handle specific application type logic
+        if (applicationType === "Tax Compliance") {
+          console.log("Calling checkRegisteredBusinesses for Tax Compliance");
+          checkRegisteredBusinesses();
+        } else if (applicationType === "Business License") {
+          console.log("Calling checkBusinessesWithTIN for Business License");
+          checkBusinessesWithTIN();
+        }
+      } else {
+        console.log("No application type provided");
+      }
+    }
+
+    // Function to check if user has registered businesses
+    function checkRegisteredBusinesses() {
+      console.log("checkRegisteredBusinesses called");
+      const noBusinessMessage = document.getElementById(
+        "no_registered_business_message"
+      );
+      const businessSelection = document.getElementById("registered_business");
+
+      console.log("noBusinessMessage:", noBusinessMessage);
+      console.log("businessSelection:", businessSelection);
+
+      // Clear existing options except the first one
+      while (businessSelection.options.length > 1) {
+        businessSelection.remove(1);
+      }
+
+      // Show loading state
+      businessSelection.disabled = true;
+      const loadingOption = document.createElement("option");
+      loadingOption.textContent = "Loading...";
+      businessSelection.appendChild(loadingOption);
+
+      // Make an AJAX call to get the user's approved businesses
+      console.log("Fetching approved businesses...");
+      // Get CSRF token
+      const csrftoken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
+      console.log("CSRF Token:", csrftoken);
+
+      fetch("/api/businesses/approved/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRFToken": csrftoken,
+        },
+        credentials: "same-origin",
+      })
+        .then((response) => {
+          // Remove loading option
+          if (businessSelection.options.length > 1) {
+            businessSelection.remove(1);
+          }
+
+          console.log("Response status:", response.status);
+          console.log("Response headers:", [...response.headers.entries()]);
+          if (!response.ok) {
+            throw new Error("Network response was not ok: " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Received data:", data);
+          if (!data || data.length === 0) {
+            // No approved businesses found
+            console.log("No approved businesses found");
+            noBusinessMessage.classList.remove("hidden");
+            businessSelection.disabled = true;
+          } else {
+            // Populate the dropdown with the approved businesses
+            console.log("Found approved businesses:", data.length);
+            noBusinessMessage.classList.add("hidden");
+            businessSelection.disabled = false;
+
+            data.forEach((business) => {
+              console.log("Adding business:", business.name, business.id);
+              const option = document.createElement("option");
+              option.value = business.id;
+              option.textContent = `${business.name} (${business.reference})`;
+              option.setAttribute("data-is-business-model", "true");
+              businessSelection.appendChild(option);
+
+              // Update the is_business_model field when an option is selected
+              if (!businessSelection._hasChangeListener) {
+                businessSelection.addEventListener("change", function () {
+                  const selectedOption = this.options[this.selectedIndex];
+                  const isBusinessModel = selectedOption.getAttribute(
+                    "data-is-business-model"
+                  );
+
+                  if (isBusinessModel) {
+                    document.getElementById("is_business_model").value =
+                      isBusinessModel;
+                  }
+                });
+                businessSelection._hasChangeListener = true;
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching approved businesses:", error);
+          // Show error message
+          noBusinessMessage.classList.remove("hidden");
+          businessSelection.disabled = true;
+        });
+    }
+
+    // Function to check if user has businesses with TIN
+    function checkBusinessesWithTIN() {
+      console.log("checkBusinessesWithTIN called");
+      const noTINMessage = document.getElementById(
+        "no_business_with_tin_message"
+      );
+      const businessWithTINSelection =
+        document.getElementById("business_with_tin");
+
+      console.log("noTINMessage:", noTINMessage);
+      console.log("businessWithTINSelection:", businessWithTINSelection);
+
+      // Clear existing options except the first one
+      while (businessWithTINSelection.options.length > 1) {
+        businessWithTINSelection.remove(1);
+      }
+
+      // Show loading state
+      businessWithTINSelection.disabled = true;
+      const loadingOption = document.createElement("option");
+      loadingOption.textContent = "Loading...";
+      businessWithTINSelection.appendChild(loadingOption);
+
+      // Make an AJAX call to get the user's businesses with TIN
+      console.log("Fetching businesses with TIN...");
+      // Get CSRF token
+      const csrftoken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
+      console.log("CSRF Token for TIN request:", csrftoken);
+
+      fetch("/api/businesses/with-tin/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+          "X-CSRFToken": csrftoken,
+        },
+        credentials: "same-origin",
+      })
+        .then((response) => {
+          // Remove loading option
+          if (businessWithTINSelection.options.length > 1) {
+            businessWithTINSelection.remove(1);
+          }
+
+          console.log("TIN Response status:", response.status);
+          if (!response.ok) {
+            throw new Error("Network response was not ok: " + response.status);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Received TIN data:", data);
+          if (!data || data.length === 0) {
+            // No businesses with TIN found
+            console.log("No businesses with TIN found");
+            noTINMessage.classList.remove("hidden");
+            businessWithTINSelection.disabled = true;
+          } else {
+            // Populate the dropdown with the businesses with TIN
+            console.log("Found businesses with TIN:", data.length);
+            noTINMessage.classList.add("hidden");
+            businessWithTINSelection.disabled = false;
+
+            data.forEach((business) => {
+              console.log(
+                "Adding business with TIN:",
+                business.name,
+                business.id,
+                business.tin
+              );
+              const option = document.createElement("option");
+              option.value = business.id;
+              option.textContent = `${business.name} (${business.tin})`;
+              option.setAttribute("data-is-business-model", "true");
+              businessWithTINSelection.appendChild(option);
+
+              // Update the is_business_model_license field when an option is selected
+              if (!businessWithTINSelection._hasChangeListener) {
+                businessWithTINSelection.addEventListener(
+                  "change",
+                  function () {
+                    const selectedOption = this.options[this.selectedIndex];
+                    const isBusinessModel = selectedOption.getAttribute(
+                      "data-is-business-model"
+                    );
+
+                    if (isBusinessModel) {
+                      document.getElementById(
+                        "is_business_model_license"
+                      ).value = isBusinessModel;
+                    }
+                  }
+                );
+                businessWithTINSelection._hasChangeListener = true;
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching businesses with TIN:", error);
+          // Show error message
+          noTINMessage.classList.remove("hidden");
+          businessWithTINSelection.disabled = true;
+        });
+    }
+
+    // Add event listeners to all application type radio buttons
+    console.log("Setting up radio button event listeners");
+    console.log("Radio buttons found:", applicationTypeRadios.length);
+
+    applicationTypeRadios.forEach(function (radio) {
+      console.log("Adding event listener to radio:", radio.id, radio.value);
+
+      // Remove any existing event listeners
+      radio.removeEventListener("change", radioChangeHandler);
+
+      // Add the event listener
+      radio.addEventListener("change", radioChangeHandler);
+    });
+
+    // Radio button change handler function
+    function radioChangeHandler() {
+      console.log("Radio change event fired for:", this.id);
+      if (this.checked) {
+        console.log("Radio changed to:", this.value);
+        showApplicationTypeFields(this.value);
+      }
+    }
+
+    // Add direct click handlers to each radio button
+    document.getElementById("business_registration").onclick = function () {
+      console.log("Business Registration radio clicked directly");
+      showApplicationTypeFields("Business Registration");
+    };
+
+    document.getElementById("tax_compliance").onclick = function () {
+      console.log("Tax Compliance radio clicked directly");
+      showApplicationTypeFields("Tax Compliance");
+    };
+
+    document.getElementById("business_license").onclick = function () {
+      console.log("Business License radio clicked directly");
+      showApplicationTypeFields("Business License");
+    };
+
+    // Get the default application type from the server
+    const defaultApplicationType = "{{ default_application_type }}";
+    console.log("Default application type:", defaultApplicationType);
+
+    // Show the initial fields based on the default application type or fallback to Business Registration
+    if (defaultApplicationType === "Tax Compliance") {
+      document.getElementById("tax_compliance").checked = true;
+      showApplicationTypeFields("Tax Compliance");
+    } else if (defaultApplicationType === "Business License") {
+      document.getElementById("business_license").checked = true;
+      showApplicationTypeFields("Business License");
+    } else {
+      // Default to Business Registration
+      document.getElementById("business_registration").checked = true;
+      showApplicationTypeFields("Business Registration");
+    }
+
+    // Test both API endpoints directly
+    console.log("Testing API endpoints directly");
+
+    // Get CSRF token for test calls
+    const testCsrftoken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+    console.log("Test CSRF Token:", testCsrftoken);
+
+    // Test approved businesses endpoint
+    fetch("/api/businesses/approved/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": testCsrftoken,
+      },
+      credentials: "same-origin",
+    })
+      .then((response) => {
+        console.log(
+          "Approved businesses API response status:",
+          response.status
+        );
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Approved businesses API data:", data);
+      })
+      .catch((error) => {
+        console.error("Approved businesses API error:", error);
+      });
+
+    // Test businesses with TIN endpoint
+    fetch("/api/businesses/with-tin/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+        "X-CSRFToken": testCsrftoken,
+      },
+      credentials: "same-origin",
+    })
+      .then((response) => {
+        console.log(
+          "Businesses with TIN API response status:",
+          response.status
+        );
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Businesses with TIN API data:", data);
+      })
+      .catch((error) => {
+        console.error("Businesses with TIN API error:", error);
+      });
+
+    // Handle adding multiple ID documents
+    let idDocumentCounter = 1;
+    const addIdDocumentButton = document.getElementById("add_id_document");
+    const idDocumentsContainer = document.getElementById(
+      "id_documents_container"
+    );
+
+    addIdDocumentButton.addEventListener("click", function () {
+      idDocumentCounter++;
+
+      const newIdDocumentDiv = document.createElement("div");
+      newIdDocumentDiv.className = "id-document-input mt-4";
+
+      newIdDocumentDiv.innerHTML = `
+        <div class="flex items-center justify-between">
+          <label for="id_document_${idDocumentCounter}" class="block text-sm font-medium text-neutral-700 mb-1">
+            Additional ID Document
+          </label>
+          <button type="button" class="remove-id-document text-sm text-red-600 hover:text-red-800">
+            Remove
+          </button>
+        </div>
+        <input
+          type="file"
+          id="id_document_${idDocumentCounter}"
+          name="id_document_${idDocumentCounter}"
+          accept=".pdf,.jpg,.jpeg,.png"
+          class="block w-full text-sm text-neutral-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
+        >
+        <p class="mt-1 text-xs text-neutral-500">Accepted formats: PDF, JPG, PNG. Max size: 5MB</p>
+      `;
+
+      idDocumentsContainer.appendChild(newIdDocumentDiv);
+
+      // Add event listener to the remove button
+      const removeButton = newIdDocumentDiv.querySelector(
+        ".remove-id-document"
+      );
+      removeButton.addEventListener("click", function () {
+        idDocumentsContainer.removeChild(newIdDocumentDiv);
+      });
+    });
+
+    // Add event listeners for the "Register business now" and "Apply for TIN now" links
+    const registerBusinessLink = document.getElementById(
+      "register_business_link"
+    );
+    if (registerBusinessLink) {
+      registerBusinessLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("business_registration").checked = true;
+        showApplicationTypeFields("Business Registration");
+      });
+    }
+
+    const getTINLink = document.getElementById("get_tin_link");
+    if (getTINLink) {
+      getTINLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("tax_compliance").checked = true;
+        showApplicationTypeFields("Tax Compliance");
+      });
+    }
+
+    // Add required attribute to fields when their section is visible
+    const form = document.querySelector("form");
+    console.log("Form found:", form);
+
+    form.addEventListener("submit", function (event) {
+      console.log("Form submission started");
+
+      // Get the selected application type
+      const selectedType = document.querySelector(
+        'input[name="application_type"]:checked'
+      );
+      console.log("Selected type element:", selectedType);
+
+      if (!selectedType) {
+        event.preventDefault();
+        alert("Please select an application type.");
+        console.log("Form submission stopped: No application type selected");
+        return;
+      }
+
+      const applicationType = selectedType.value;
+      console.log("Application type:", applicationType);
+
+      // Log all form fields
+      console.log("Form fields:");
+      const formData = new FormData(form);
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+
+      // Get the visible fields section
+      const visibleFieldset = document.querySelector(
+        ".application-type-fields:not(.hidden)"
+      );
+
+      if (visibleFieldset) {
+        console.log("Visible fieldset ID:", visibleFieldset.id);
+
+        // For Tax Compliance, only validate the registered_business field
+        if (applicationType === "Tax Compliance") {
+          const businessSelect = document.getElementById("registered_business");
+          console.log("Business select:", businessSelect);
+          console.log(
+            "Business select value:",
+            businessSelect ? businessSelect.value : "null"
+          );
+
+          if (businessSelect && businessSelect.value === "") {
+            event.preventDefault();
+            alert("Please select a registered business.");
+            console.log("Form submission stopped: No business selected");
+            return;
+          }
+
+          // Remove required attribute from all fields that aren't relevant for Tax Compliance
+          document
+            .querySelectorAll(
+              "input[required], select[required], textarea[required]"
+            )
+            .forEach((field) => {
+              // Skip the registered_business field which is needed
+              if (field.id !== "registered_business") {
+                console.log("Removing required attribute from:", field.id);
+                field.removeAttribute("required");
+              }
+            });
+
+          // Add dummy values for required fields that aren't visible but might be expected by the server
+          const requiredFields = [
+            "business_name",
+            "business_type",
+            "business_address",
+            "business_category",
+          ];
+          requiredFields.forEach((fieldName) => {
+            // Check if the field already exists in the form
+            if (!form.querySelector(`input[name="${fieldName}"]`)) {
+              const hiddenField = document.createElement("input");
+              hiddenField.type = "hidden";
+              hiddenField.name = fieldName;
+              hiddenField.value = "N/A for Tax Compliance";
+              form.appendChild(hiddenField);
+              console.log(
+                `Added hidden field ${fieldName} with placeholder value`
+              );
+            }
+          });
+
+          // Add a hidden field to ensure the application type is correctly submitted
+          const hiddenAppTypeField = document.createElement("input");
+          hiddenAppTypeField.type = "hidden";
+          hiddenAppTypeField.name = "application_type";
+          hiddenAppTypeField.value = "Tax Compliance";
+          form.appendChild(hiddenAppTypeField);
+
+          console.log(
+            "Added hidden application_type field with value:",
+            hiddenAppTypeField.value
+          );
+        } else {
+          // For other application types, add required attribute to all fields with * in their label
+          const requiredFields = visibleFieldset.querySelectorAll("label");
+
+          requiredFields.forEach(function (label) {
+            if (label.textContent.includes("*")) {
+              const fieldId = label.getAttribute("for");
+              const field = document.getElementById(fieldId);
+
+              if (field) {
+                field.setAttribute("required", "required");
+              }
+            }
+          });
+        }
+      }
+
+      // Log form data before submission
+      console.log("Form is valid, submitting...");
+      const formData = new FormData(form);
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+    });
+  });
+</script>
+
+{% block extra_js %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    function showApplicationTypeFields(applicationType) {
+      console.log("Showing fields for:", applicationType);
+
+      // Hide all application type fields
+      const allFields = document.querySelectorAll(".application-type-fields");
+      allFields.forEach(function (field) {
+        field.classList.add("hidden");
+      });
+
+      // Show the selected application type fields
+      if (applicationType === "Business Registration") {
+        document
+          .getElementById("business_registration_fields")
+          .classList.remove("hidden");
+      } else if (applicationType === "Tax Compliance") {
+        document
+          .getElementById("tax_compliance_fields")
+          .classList.remove("hidden");
+      } else if (applicationType === "Business License") {
+        document
+          .getElementById("business_license_fields")
+          .classList.remove("hidden");
+      }
+    }
+
+    // Add change event listener to all radio buttons
+    const radioButtons = document.querySelectorAll(
+      'input[name="application_type"]'
+    );
+    for (const radioButton of radioButtons) {
+      radioButton.onchange = function () {
+        showApplicationTypeFields(this.value);
+      };
+    }
+
+    // Get the default application type from the server
+    const defaultApplicationType = "{{ default_application_type }}";
+    console.log("Default application type:", defaultApplicationType);
+
+    // Show the initial fields based on the default application type or fallback to Business Registration
+    if (defaultApplicationType === "Tax Compliance") {
+      document.getElementById("tax_compliance").checked = true;
+      showApplicationTypeFields("Tax Compliance");
+    } else if (defaultApplicationType === "Business License") {
+      document.getElementById("business_license").checked = true;
+      showApplicationTypeFields("Business License");
+    } else {
+      // Default to Business Registration
+      document.getElementById("business_registration").checked = true;
+      showApplicationTypeFields("Business Registration");
+    }
+  });
+</script>
+{% endblock %} {% endblock %}

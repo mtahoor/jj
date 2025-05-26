@@ -1,0 +1,243 @@
+{% load static %}
+<header class="fixed w-full z-50 transition-all duration-300 bg-blue-900" id="header">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between items-center py-4">
+      <div class="flex items-center">
+        <a href="{% url 'home' %}" class="flex items-center">
+          <img src="{% static 'images/eodb-portal-logo.png' %}" alt="EODB Logo" class="h-14 bg-white rounded-full  w-auto mr-3" />
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex ml-10">
+          <div class="flex space-x-8">
+            <a
+              href="{% url 'home' %}"
+              class="text-white hover:text-primary-200 px-3 py-2 font-medium"
+              >Home</a
+            >
+            <a
+              href="{% url 'services:list' %}"
+              class="text-white hover:text-primary-200 px-3 py-2 font-medium"
+              >Services</a
+            >
+            <a
+              href="{% url 'documents:list' %}"
+              class="text-white hover:text-primary-200 px-3 py-2 font-medium"
+              >Documents</a
+            >
+          </div>
+        </nav>
+      </div>
+
+      <!-- Right side navigation -->
+      <div class="hidden md:flex items-center space-x-4">
+        {% if user.is_authenticated %}
+        {% if user.is_staff %}
+        <a
+          href="{% url 'dashboard:admin' %}"
+          class="text-white hover:text-primary-200 px-3 py-2 font-medium"
+          >Admin Dashboard</a
+        >
+        {% else %}
+        <a
+          href="{% url 'dashboard:home' %}"
+          class="text-white hover:text-primary-200 px-3 py-2 font-medium"
+          >Dashboard</a
+        >
+        {% endif %}
+        <div class="relative" id="account-dropdown-container">
+          <button id="account-dropdown-button" class="flex items-center space-x-2 text-white hover:text-primary-200 px-3 py-2 font-medium">
+            <span>My Account</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+          <div id="account-dropdown-menu" class="absolute right-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
+            <a href="{% url 'accounts:profile' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100">
+              Profile Settings
+            </a>
+            {% if user.is_staff %}
+            <a href="{% url 'dashboard:admin' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100">
+              Admin Dashboard
+            </a>
+            <a href="{% url 'dashboard:review_applications' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100">
+              Review Applications
+            </a>
+            {% else %}
+            <a href="{% url 'accounts:applications' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100">
+              My Applications
+            </a>
+            {% endif %}
+            <div class="border-t border-neutral-200 my-1"></div>
+            <a href="{% url 'accounts:logout' %}" class="block px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-100">
+              Logout
+            </a>
+          </div>
+        </div>
+        {% else %}
+        <a
+          href="{% url 'accounts:login' %}"
+          class="text-white hover:text-primary-200 px-3 py-2 font-medium"
+          >Login</a
+        >
+        <a
+          href="{% url 'accounts:signup' %}"
+          class="px-5 py-2 rounded-full font-medium bg-primary-500 text-white hover:bg-primary-600 transition-colors shadow-md"
+          >Sign Up</a
+        >
+        {% endif %}
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button
+          id="mobile-menu-button"
+          class="p-2 rounded-md text-white hover:bg-white/20"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        href="{% url 'home' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Home</a
+      >
+      <a
+        href="{% url 'services:list' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Services</a
+      >
+      <a
+        href="{% url 'documents:list' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Documents</a
+      >
+
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}
+      <a
+        href="{% url 'dashboard:admin' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Admin Dashboard</a
+      >
+      {% else %}
+      <a
+        href="{% url 'dashboard:home' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Dashboard</a
+      >
+      {% endif %}
+      <a
+        href="{% url 'accounts:profile' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Profile Settings</a
+      >
+      {% if user.is_staff %}
+      <a
+        href="{% url 'dashboard:review_applications' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Review Applications</a
+      >
+      {% else %}
+      <a
+        href="{% url 'accounts:applications' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >My Applications</a
+      >
+      {% endif %}
+      <a
+        href="{% url 'accounts:logout' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Logout</a
+      >
+      {% else %}
+      <a
+        href="{% url 'accounts:login' %}"
+        class="block px-3 py-2 rounded-md text-base font-medium text-neutral-800 hover:bg-neutral-100"
+        >Login</a
+      >
+      <div class="px-3 py-2">
+        <a
+          href="{% url 'accounts:signup' %}"
+          class="block w-full px-5 py-3 text-center font-medium rounded-full bg-primary-500 text-white hover:bg-primary-600 transition-colors"
+          >Sign Up</a
+        >
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
+
+<script>
+  // Header scroll behavior
+  const header = document.getElementById("header");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  // Account dropdown elements
+  const accountDropdownButton = document.getElementById("account-dropdown-button");
+  const accountDropdownMenu = document.getElementById("account-dropdown-menu");
+  const accountDropdownContainer = document.getElementById("account-dropdown-container");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      header.classList.add("bg-accent-800", "shadow-md");
+    } else {
+      header.classList.remove("bg-accent-800", "shadow-md");
+    }
+  });
+
+  // Mobile menu toggle
+  mobileMenuButton.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+
+  // Account dropdown toggle
+  if (accountDropdownButton) {
+    let isDropdownOpen = false;
+
+    accountDropdownButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      isDropdownOpen = !isDropdownOpen;
+
+      if (isDropdownOpen) {
+        accountDropdownMenu.classList.remove("hidden");
+      } else {
+        accountDropdownMenu.classList.add("hidden");
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+      if (isDropdownOpen && !accountDropdownContainer.contains(e.target)) {
+        accountDropdownMenu.classList.add("hidden");
+        isDropdownOpen = false;
+      }
+    });
+
+    // Prevent dropdown from closing when clicking inside it
+    accountDropdownMenu.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  }
+</script>
