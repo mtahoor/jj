@@ -129,7 +129,7 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://jj-production.up.railway.app"
+    "https://eodb-demo.up.railway.app"
 ]
 
 # Media files
