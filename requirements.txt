@@ -8,3 +8,4 @@ psycopg2-binary==2.9.9
 drf-yasg==1.21.7
 setuptools
 dj-database-url==2.3.0
+gunicorn==23.0.0
