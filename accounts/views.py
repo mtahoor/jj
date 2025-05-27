@@ -7,8 +7,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.db import transaction
 from .models import Profile
 from .forms import UserUpdateForm, ProfileUpdateForm
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import requires_csrf_token
 
-
+@requires_csrf_token
 def login_view(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
